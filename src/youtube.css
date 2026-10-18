@@ -1,0 +1,69 @@
+/*
+ * Cosmetic filtering for YouTube.
+ *
+ * Every rule is scoped to `html:not(.pab-off)` so src/youtube.js can disable
+ * all hiding instantly (by adding `.pab-off` to <html>) without a page reload.
+ */
+
+/* --- In-player ad surfaces ------------------------------------------------ */
+html:not(.pab-off) .video-ads,
+html:not(.pab-off) .ytp-ad-module,
+html:not(.pab-off) .ytp-ad-overlay-container,
+html:not(.pab-off) .ytp-ad-image-overlay,
+html:not(.pab-off) .ytp-ad-player-overlay,
+html:not(.pab-off) .ytp-ad-player-overlay-layout,
+html:not(.pab-off) .ytp-ad-action-interstitial,
+html:not(.pab-off) .ytp-featured-product,
+html:not(.pab-off) .ytp-suggested-action,
+html:not(.pab-off) #player-ads {
+  display: none !important;
+}
+
+/* --- Feed, search and sidebar ads ---------------------------------------- */
+html:not(.pab-off) ytd-ad-slot-renderer,
+html:not(.pab-off) ytd-in-feed-ad-layout-renderer,
+html:not(.pab-off) ytd-display-ad-renderer,
+html:not(.pab-off) ytd-promoted-video-renderer,
+html:not(.pab-off) ytd-promoted-sparkles-web-renderer,
+html:not(.pab-off) ytd-promoted-sparkles-text-search-renderer,
+html:not(.pab-off) ytd-compact-promoted-video-renderer,
+html:not(.pab-off) ytd-compact-promoted-item-renderer,
+html:not(.pab-off) ytd-search-pyv-renderer,
+html:not(.pab-off) ytd-action-companion-ad-renderer,
+html:not(.pab-off) ytd-video-masthead-ad-v3-renderer,
+html:not(.pab-off) ytd-video-masthead-ad-advertiser-info-renderer,
+html:not(.pab-off) ytd-player-legacy-desktop-watch-ads-renderer,
+html:not(.pab-off) #masthead-ad {
+  display: none !important;
+}
+
+/* Collapse the wrappers so the grid/list does not keep an empty slot. */
+html:not(.pab-off) ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+html:not(.pab-off) ytd-rich-item-renderer:has(ytd-in-feed-ad-layout-renderer),
+html:not(.pab-off) ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
+html:not(.pab-off) ytd-item-section-renderer:has(> #contents > ytd-ad-slot-renderer),
+html:not(.pab-off) ytd-item-section-renderer:has(> #contents > ytd-promoted-video-renderer) {
+  display: none !important;
+}
+
+/* --- Banners, upsells and promo nags ------------------------------------- */
+html:not(.pab-off) ytd-banner-promo-renderer,
+html:not(.pab-off) ytd-banner-promo-renderer-background,
+html:not(.pab-off) ytd-statement-banner-renderer,
+html:not(.pab-off) ytd-primetime-promo-renderer,
+html:not(.pab-off) ytd-brand-video-shelf-renderer,
+html:not(.pab-off) ytd-brand-video-singleton-renderer,
+html:not(.pab-off) ytd-merch-shelf-renderer,
+html:not(.pab-off) ytd-mealbar-promo-renderer,
+html:not(.pab-off) yt-mealbar-promo-renderer,
+html:not(.pab-off) ytd-popup-container:has(ytd-mealbar-promo-renderer),
+html:not(.pab-off) ytd-engagement-panel-section-list-renderer[target-id='engagement-panel-ads'],
+html:not(.pab-off) ytd-ads-engagement-panel-content-renderer {
+  display: none !important;
+}
+
+/* --- Anti-adblock modal (also removed from the DOM by youtube.js) -------- */
+html:not(.pab-off) ytd-enforcement-message-view-model,
+html:not(.pab-off) tp-yt-paper-dialog:has(ytd-enforcement-message-view-model) {
+  display: none !important;
+}

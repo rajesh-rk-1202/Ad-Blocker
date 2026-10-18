@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <img src="../icons/icon32.png" alt="" width="24" height="24" />
+      <h1>Ad Blocker</h1>
+      <label class="switch" title="Enable or disable all blocking">
+        <input type="checkbox" id="enabled" />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <section class="stats">
+      <div>
+        <strong id="tabBlocked">0</strong>
+        <span>this page</span>
+      </div>
+      <div>
+        <strong id="totalBlocked">0</strong>
+        <span>all time</span>
+      </div>
+    </section>
+
+    <section class="options">
+      <label><input type="checkbox" id="skipVideoAds" /> Skip YouTube video ads</label>
+      <label><input type="checkbox" id="hideCosmetic" /> Hide promoted content &amp; banners</label>
+      <label><input type="checkbox" id="blockAntiAdblock" /> Dismiss "ad blocker detected" popups</label>
+    </section>
+
+    <footer>
+      <span id="status"></span>
+      <button id="reset" type="button">Reset stats</button>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

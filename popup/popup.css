@@ -1,0 +1,168 @@
+:root {
+  color-scheme: dark;
+  --bg: #17181c;
+  --panel: #1f2126;
+  --text: #e8e8ea;
+  --muted: #9a9ca3;
+  --accent: #d32f2f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 280px;
+  margin: 0;
+  padding: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  width: 38px;
+  height: 20px;
+  flex: none;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #3a3d44;
+  border-radius: 10px;
+  transition: background 0.15s;
+  pointer-events: none;
+}
+
+.slider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+
+.switch input:checked + .slider {
+  background: var(--accent);
+}
+
+.switch input:checked + .slider::after {
+  transform: translateX(18px);
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stats div {
+  flex: 1;
+  padding: 10px;
+  background: var(--panel);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stats strong {
+  display: block;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.options label:hover {
+  background: var(--panel);
+}
+
+.options input {
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+body.disabled .options,
+body.disabled .stats {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid #2a2c32;
+  padding-top: 10px;
+}
+
+#status {
+  color: var(--muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button {
+  flex: none;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid #343741;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
