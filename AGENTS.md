@@ -1,7 +1,11 @@
-# Personal Ad Blocker
+# Personal Ad Blocker — maintainer notes
 
 Unpacked Manifest V3 Chrome extension. **No build step** — edit files and hit reload
 in `chrome://extensions`.
+
+See `README.md` for full documentation (architecture, usage, troubleshooting, design
+rationale). This file is the terse version: layout, commands, and the gotchas that
+cost time.
 
 ## Layout
 
@@ -54,4 +58,21 @@ console for errors.
   extensions. The badge counter silently stops working if installed packed.
 - YouTube renames its `ytd-*` element names fairly often; if ads reappear, inspect
   the element and add the selector to both `COSMETIC_SELECTORS` in `src/youtube.js`
-  and `src/youtube.css`.
+  and `src/youtube.css`. Keep the `html:not(.pab-off)` prefix on new CSS rules or the
+  popup toggle stops working for them.
+
+## Known shortcomings (not bugs — deliberate or unaddressed)
+
+- The blocklist is only 67 hand-written domains. For non-YouTube sites this is
+  strictly worse than uBlock Origin. Do not oversell it as a general ad blocker.
+- `host_permissions: <all_urls>` in the manifest is **not needed** (DNR `block` rules
+  are implicitly permitted; content scripts are authorised by their own `matches`).
+  Removing it is a pending least-privilege improvement.
+- The 400 ms `setInterval` plus a whole-document MutationObserver runs in every
+  iframe (`all_frames: true`). Driving off the video element's own events and scoping
+  the observer to `#movie_player` is the correct fix.
+- No tests. Selector drift is the most likely source of silent rot; jsdom fixtures
+  for `handleVideoAd()` would catch it.
+- Minor: SPA navigation never resets the badge count (`onUpdated` only resets on
+  `status === 'loading'`); `restorePlayback()` clobbers a mute toggled during an ad;
+  `totalBlocked` can be lost if the worker is evicted inside its 2 s debounce.
